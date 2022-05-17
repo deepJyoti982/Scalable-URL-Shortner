@@ -1,5 +1,6 @@
 const urlModel = require('../modules/urlModel')
 const validUrl = require('valid-url')
+const shortid = require('shortid');
 
 const urlshortner = async (req, res) => {
     try {
@@ -11,8 +12,8 @@ const urlshortner = async (req, res) => {
         //validating url
         if (!validUrl.isUri(originalUrl)) return res.status(400).send({ status: false, message: "Enter a valid url" })
         //creating short url
-        let short = "http://localhost:3000/" + originalUrl.replace(/[^a-z]/g, '').slice(-4);
-        let code = originalUrl.replace(/[^a-z]/g, '').slice(-4)
+        let code=shortid.generate().toLowerCase()
+        let short = "http://localhost:3000/" + code
         let output = {
             longUrl: originalUrl,
             shortUrl: short,
@@ -40,10 +41,11 @@ const getUrl = async function (req,res) {
     try {
         let code = req.params.urlCode;
         const check = await urlModel.findOne({urlCode: code})
-        
-        // console.log(check)
-
-        res.status( 301 ).send({status: true, data: check.longUrl})
+         res.writeHead(301, {
+            "Location": check.longUrl
+        });
+        res.end()
+        //res.status(301)send({status:true,data:check.longUrl})
     }
     catch (er) {
         res.status(500).send({ status: false, message: er.message })
