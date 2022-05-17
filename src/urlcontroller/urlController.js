@@ -34,6 +34,21 @@ const urlshortner = async (req, res) => {
         res.status(500).send({ status: false, message: er.message })
     }
 }
+
+
+const getUrl = async function (req,res) {
+    try {
+        let code = req.params.urlCode;
+        const check = await urlModel.findOne({urlCode: code})
+        
+        // console.log(check)
+
+        res.status( 301 ).send({status: true, data: check.longUrl})
+    }
+    catch (er) {
+        res.status(500).send({ status: false, message: er.message })
+    }
+}
 // function for urlshortner
 // const urlconverter = (longURL) => {
 //     let obj = {}
@@ -44,4 +59,4 @@ const urlshortner = async (req, res) => {
 //     return shortURL
 // }
 
-module.exports = { urlshortner }
+module.exports = { urlshortner , getUrl}
