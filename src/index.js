@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 mongoose
   .connect(
-    "mongodb+srv://saurabh042160:iafSq7ML1zCfugKI@cluster1.ymdh1.mongodb.net/group-52-Database", {
+    "mongodb+srv://deepJyoti982:deep982@cluster0.hcglv.mongodb.net/deepJyoti982", {
       useNewUrlParser: true,
     }
   )
