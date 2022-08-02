@@ -1,4 +1,4 @@
-# Uranium-batch
+# Uranium-batch(FunctionUp)
 # Project-4-Scalable-URL-Shortner
 
 ## Scalable URL Shortner Project Requirement
